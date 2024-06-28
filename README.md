@@ -20,17 +20,38 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+Proje Adı: Custom Package Selections
 
-To learn more about Next.js, take a look at the following resources:
+Projenin amacı https://beije.co internet sitesinde bulunan https://beije.co/custom-packet kişiye özel paket sayfasının bir kopyasını oluşturmak.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Proje kapsamında ilk önce Next.js ile yeni bir proje oluşturuldu. Projede gerekli olabilecek dosyaları içeren bir components dosyası oluşturuldu ve içerisinde Product.jsx, packageList.jsx ve Layout.js bileşenleri oluşturuldu. Projenin kopyası taslak olarak oluşturuldu.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Ürünler, Biz Kimiz?, Bağış Kültürü, Regl Testi!, Kendi Paketini Oluştur menülerini içeren ayrı bir Header.jsx dosyası, footer kısmını içeren Footer.jsx dosyaları eklendi.
 
-## Deploy on Vercel
+Daha sonra beije Ped, beije Günlük Ped ve beije Tampon ürünleri için üç buton oluşturuldu ve alt seçenekleri eklendi. Seçilen ürünün tespiti için projeye useState import edildi ve const [selectedProduct, setSelectedProduct] = useState(null) değişkeni tanımlandı. Üç ürün butonunun işlevselliği için handleProductClick fonksiyonu oluşturuldu. selectedProduct değişkeninin değeri ürünün adıdır ve bu değer ürünün adı olduğu için selectedProduct değişkeninin değeri değiştiğinde ürünün adı değişecektir. Bu fonksiyonda productName parametresi kullanıcı tarafıdan tıklanan ürünün adını temsil etmektedir. Bu fonksiyon ilgili buton içerisinde onClick={() => handleProductClick('beije Ped')} şeklinde kullanılmıştır. Böylece fonksiyon butonun onClick özelliği içinde çağırılır ve hangi ürünün seçildiği anlık olarak güncellenir.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+packageInputs değişkeni, kullanıcının ürün paketlerine ilişkin girişlerini (inputs) tutan bir objedir. Projede kullanılan slider bileşenleriyle ilişkilendirilen her bir ürün paketi için kullanıcının girdiği değerler bu objede saklanır. Kullanıcı bir ürün paketinin miktarını seçmek için bir slider'ı hareket ettirdiğinde bu değer packageInputs objesine kaydedilecektir.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+handleSliderChange fonksiyonu bir slider bileşeninin değeri değiştiğinde çalışacak olan bir olay işleyicisidir. Bu fonksiyon iki parametre alır: title ve event.
+title: Slider bileşeninin hangi ürün paketi için olduğunu belirten "Standart Ped", "Süper Ped" gibi bir dizedir.
+event: Slider bileşeninin tetiklediği olay nesnesidir. Bu nesne genellikle event.target.value aracılığıyla sürgüdeki yeni değeri içerir.
+Önceki packageInputs durumunu (...packageInputs) koruyarak belirtilen title anahtarına sahip değeri güncelleyen yeni bir obje oluşturuldu.
+Yani, handleSliderChange fonksiyonu, her slider değeri değiştiğinde, ilgili ürün paketi (title) için yeni değeri (event.target.value) içeren packageInputs state'ini güncelleyecektir.
+
+Daha sonra bu ürün butonlarına selectedProduct === 'beije Ped' koşulu doğruysa (yani beije Ped seçilmişse) ilgili butonun altı çizili ve bold olması için active sınıfı da eklenmiştir.
+
+<PackageList title="Standart Ped" />: title prop'u ile 'Standart Ped' olarak belirlenmiştir. Bu bileşen 'Standart Ped' ürünü için paket seçeneklerini listelemektedir.
+
+Daha sonra kullanıcı seçimlerini saklamak için projeye useContext dahil edilmiştir. Bu kapsamda projeye ProductContext.js dosyası eklenmiştir. ProductProvider, içindeki value prop'uyla context'in değerlerini tüm alt bileşenlere iletecektir. Bu sayede selectedProduct, packageInputs, handleProductClick, handleSliderChange gibi değerlere ve fonksiyonlara herhangi bir alt bileşen useContext(ProductContext) hook'u ile erişebilir.
+
+Daha sonrasında sepet ekle ve kaldır butonlarına işlevsellik ekleme amacıyla { addToCart, removeFromCart } fonksiyonları tanımlanmıştır.
+
+Sayfa ilk yüklendiğinde handleProductClick('beije Ped') fonksiyonunu çalıştırmak için projede useEffect() kullanılmıştır.
+
+Seçilen ürünlere göre paket içeriğinin toplam fiyatını hesaplamak için calculateTotalPrice() fonksiyonu oluşturulmuştur. Seçilen ürünlerin adını temsil etmesi için Object.keys(packageInputs) kullanılmıştır. packageInputs objesinin anahtarlarını (keys) almaktadır.
+
+map((key) => ({ ... })): ile her key için bir obje oluşturulur. Bu objeler, ürünün adı (title), miktarı (quantity) ve toplam fiyatı (price) içerir.
+
+const Total değişkeninde kullanılan reduce((sum, item) => sum + item.price, 0) yardımcı fonksiyonu ile itemsToAdd dizisinde seçilen her ögenin fiyatı toplanır.setTotalPrice(total): total değerini totalPrice state'ine atanır. Bu sayede, toplam fiyat güncellenmiş olur ve arayüzde gösterilebilir. Ayrıca istenildiği gibi totalPrice fonksiyonu 'sepete ekle' butonunda kullanılmış ve butona eklenen veriler buton üzerinde de görüntülenmektedir.
+
+Son olarak da sayfasının responsive olması için css düzenlemeleri yapılmıştır.

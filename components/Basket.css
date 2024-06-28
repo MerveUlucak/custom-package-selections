@@ -1,0 +1,124 @@
+.basket-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  padding: 32px;
+  width: 466px;
+}
+
+.special-package {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.48px;
+  line-height: 36.4px;
+  margin: 0;
+}
+
+.special-package-span {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  line-height: 19.2px;
+  padding: 12px 16px;
+  width: 402px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.custom-icon {
+  display: flex;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.03) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.05) 0px 5px 15px 0px;
+  border-radius: 8px;
+  line-height: 50px;
+  margin-bottom: 16px;
+}
+
+.custom-icon span {
+  margin-left: 8px;
+}
+
+.add-to-cart-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 25.92px;
+  width: 402px;
+  padding: 12px 22px;
+  border-radius: 64px;
+  cursor: pointer;
+  transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  outline: none;
+}
+
+.remove-from-cart-button {
+  display: block;
+  padding: 10px 0 8px;
+  border-radius: 64px;
+  margin-right: 200px;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+img {
+  font-size: 6px;
+  font-style: normal;
+  font-weight: 400;
+  height: 180px;
+  letter-spacing: -0.48px;
+  line-height: 19.2px;
+  max-width: 100%;
+  overflow-x: clip;
+  overflow-y: clip;
+}
+
+@media (max-width: 768px), (max-width: 1024px) {
+  .special-package {
+    display: none;
+  }
+  .special-package-span {
+    display: none;
+  }
+  .button-container {
+    align-items: center;
+  }
+
+  .product-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .product-buttons button {
+    margin-bottom: 10px;
+    width: 80%;
+  }
+  .basket-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .special-package-span img {
+    width: 100%;
+    height: auto;
+  }
+  .add-to-cart-button,
+  .remove-from-cart-button {
+    width: 80%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
