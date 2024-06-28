@@ -15,6 +15,15 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.product-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .product-buttons button {
   padding: 10px;
   margin-right: 100px;
@@ -29,13 +38,7 @@
   cursor: pointer;
   min-width: 90px;
 }
-.product-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 10px;
-}
+
 .product-buttons .active {
   border-bottom: 2px solid black;
   font-weight: bold;
@@ -43,7 +46,8 @@
 
 .packed {
   display: flex;
-  justify-content: column;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
   padding: 20px;
@@ -53,9 +57,11 @@
   letter-spacing: -0.48px;
   width: 100%;
 }
+
 .packed > * {
   width: 100%;
 }
+
 .packed h1 {
   color: rgba(0, 0, 0, 0.9);
   font-size: 28px;
@@ -143,13 +149,17 @@
     text-align: center;
   }
   .product-buttons {
-    max-width: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: nowrap;
+    flex-direction: row;
   }
   .product-buttons button {
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+    flex: 1;
+    margin-right: 10px;
+    max-width: 100px;
   }
 
   .products-container span {
@@ -167,7 +177,25 @@
     max-width: 100%;
   }
   .slider {
-    width: 50%;
+    width: 100%;
+  }
+  .slider-container {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .slider-wrapper {
+    width: 100%;
+    position: relative;
+  }
+  .slider-value {
+    position: absolute;
+    top: 10px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  .min-value,
+  .max-value {
+    font-size: 14px;
   }
 }
 
